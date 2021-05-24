@@ -1,0 +1,14 @@
+.artist-heading {
+  font-weight: 500;
+  line-height: 1.4rem;
+}
+
+.artist-info {
+  font-size: 0.8rem;
+}
+
+.list-group-item {
+  > .list-container:first-of-type {
+    width: 150px;
+  }
+}

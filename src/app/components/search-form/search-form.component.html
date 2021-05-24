@@ -1,0 +1,11 @@
+<p class="text-muted my-3">Type a music artist to search and preview their music videos.</p>
+
+<form #artistForm="ngForm" (ngSubmit)="onSearch(artist.value)">
+  <div class="form-group">
+    <input ngModel #artist="ngModel" type="text" required name="artist" class="form-control" />
+  </div>
+
+  <button type="submit" [disabled]="!artistForm.valid" class="btn btn-sm btn-dark">Search</button>
+
+  <div *ngIf="!artist.valid && artist.touched" class="mt-2 alert alert-danger">Music artist is required</div>
+</form>
