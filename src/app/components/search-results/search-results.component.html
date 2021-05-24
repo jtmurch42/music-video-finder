@@ -1,11 +1,11 @@
-<p *ngIf="!musicArtistResults" class="text-center">Getting results...</p>
+<p *ngIf="!musicVideos" class="text-center">Getting results...</p>
 
 <div
-  *ngIf="musicArtistResults?.resultCount"
+  *ngIf="musicVideos?.resultCount"
   class="d-flex-none d-md-flex align-items-md-baseline justify-content-md-between mt-0"
 >
   <p class="ml-1">
-    <span class="text-primary">{{ musicArtistResults.resultCount }}</span> results for {{ musicArtist }}
+    <span class="text-primary">{{ musicVideos.resultCount }}</span> results for {{ musicArtist }}
   </p>
 
   <form #sortForm="ngForm" class="radio ml-1 mb-2" (change)="sortBy(sortForm.value.sortBy, sortForm.value.reversed)">
@@ -25,9 +25,9 @@
   </form>
 </div>
 
-<ul *ngIf="musicArtistResults?.results.length" class="list-group">
+<ul *ngIf="musicVideos?.results?.length" class="list-group">
   <li
-    *ngFor="let artist of musicArtistResults.results | orderBy: order:reversed"
+    *ngFor="let artist of musicVideos.results | orderBy: order:reversed"
     class="d-flex justify-content-between list-group-item"
   >
     <div class="list-container">
@@ -56,4 +56,4 @@
   </li>
 </ul>
 
-<p *ngIf="musicArtistResults?.resultCount === 0" class="text-center">No results found</p>
+<p *ngIf="musicVideos?.resultCount === 0" class="text-center">No results found</p>

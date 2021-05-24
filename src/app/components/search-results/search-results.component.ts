@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderPipe } from 'ngx-order-pipe';
 
-import { AppService } from 'src/app/app.service';
+import { AppService } from '../../app.service';
+import { MusicVideo } from '../../music-video.model';
 
 @Component({
   selector: 'app-search-results',
@@ -11,7 +12,7 @@ import { AppService } from 'src/app/app.service';
 })
 export class SearchResultsComponent implements OnInit {
   musicArtist = this.appService.artist;
-  musicArtistResults: any;
+  musicVideos: MusicVideo;
   order = 'trackName';
   reversed = false;
 
@@ -24,8 +25,8 @@ export class SearchResultsComponent implements OnInit {
     }
 
     this.appService.getMusicVideos().subscribe((res) => {
-      this.musicArtistResults = res;
-      this.musicArtistResults = this.orderPipe.transform(this.musicArtistResults, 'trackName');
+      this.musicVideos = res;
+      this.musicVideos = this.orderPipe.transform(this.musicVideos, 'trackName');
     });
   }
 
