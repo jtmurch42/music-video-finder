@@ -1,4 +1,6 @@
-<p *ngIf="!musicVideos" class="text-center">Getting results...</p>
+<p *ngIf="!musicVideos && !showError" class="text-center">Getting results...</p>
+
+<p *ngIf="showError" class="text-center text-danger">An error occurred while loading the data.</p>
 
 <div
   *ngIf="musicVideos?.resultCount"
@@ -37,7 +39,7 @@
       <img [src]="artist.artworkUrl100" />
     </div>
     <div class="list-container d-none d-sm-block">
-      <p class="artist-info my-0">Release Date: {{ artist.releaseDate | date: "M/d/yyyy" }}</p>
+      <p class="artist-info my-0">Release Date: {{ artist.releaseDate | date: 'M/d/yyyy' }}</p>
       <p class="artist-info my-0">Genre: {{ artist.primaryGenreName }}</p>
     </div>
     <div class="list-container">
@@ -47,7 +49,7 @@
         </button>
       </a>
       <p class="d-block text-right mt-2 mb-0 d-sm-none artist-info">
-        {{ artist.releaseDate | date: "M/d/yyyy" }}
+        {{ artist.releaseDate | date: 'M/d/yyyy' }}
       </p>
       <p class="d-block text-right mt-0 d-sm-none artist-info">
         {{ artist.primaryGenreName }}

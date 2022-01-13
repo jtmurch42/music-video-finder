@@ -15,6 +15,7 @@ export class SearchResultsComponent implements OnInit {
   musicVideos: MusicVideo;
   order = 'trackName';
   reversed = false;
+  showError: boolean;
 
   constructor(private appService: AppService, private orderPipe: OrderPipe, private router: Router) {}
 
@@ -24,10 +25,15 @@ export class SearchResultsComponent implements OnInit {
       return;
     }
 
-    this.appService.getMusicVideos().subscribe((res) => {
-      this.musicVideos = res;
-      this.musicVideos = this.orderPipe.transform(this.musicVideos, 'trackName');
-    });
+    this.appService.getMusicVideos().subscribe(
+      (res) => {
+        this.musicVideos = res;
+        this.musicVideos = this.orderPipe.transform(this.musicVideos, 'trackName');
+      },
+      () => {
+        this.showError = true;
+      }
+    );
   }
 
   sortBy(order: string, reversed: boolean): void {
