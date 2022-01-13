@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-music-videos": {
+    "ng-music-video-finder": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ng-music-videos:build:production"
+              "browserTarget": "ng-music-video-finder:build:production"
             },
             "development": {
-              "browserTarget": "ng-music-videos:build:development"
+              "browserTarget": "ng-music-video-finder:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-music-videos:build"
+            "browserTarget": "ng-music-video-finder:build"
           }
         },
         "test": {
@@ -107,5 +107,5 @@
       }
     }
   },
-  "defaultProject": "ng-music-videos"
+  "defaultProject": "ng-music-video-finder"
 }
