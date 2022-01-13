@@ -14,7 +14,6 @@ export class SearchResultsComponent implements OnInit {
   musicArtist = this.appService.artist;
   musicVideos: MusicVideo;
   order = 'trackName';
-  reversed = false;
   showError: boolean;
 
   constructor(private appService: AppService, private orderPipe: OrderPipe, private router: Router) {}
@@ -34,10 +33,5 @@ export class SearchResultsComponent implements OnInit {
         this.showError = true;
       }
     );
-  }
-
-  sortBy(order: string, reversed: boolean): void {
-    this.order = order;
-    this.reversed = reversed;
   }
 }

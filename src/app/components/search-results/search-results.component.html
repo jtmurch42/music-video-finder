@@ -10,26 +10,21 @@
     <span class="text-primary">{{ musicVideos.resultCount }}</span> results for {{ musicArtist }}
   </p>
 
-  <form #sortForm="ngForm" class="radio ml-1 mb-2" (change)="sortBy(sortForm.value.sortBy, sortForm.value.reversed)">
+  <form #sortForm="ngForm" class="radio ml-1 mb-2">
     <div class="form-group">
+      <span class="mr-3 font-weight-bold">Sort:</span>
       <label class="mr-4">
         Track Name
         <input type="radio" [(ngModel)]="order" name="sortBy" value="trackName" />
       </label>
-      <label class="mr-4">
-        Release Date <input type="radio" [(ngModel)]="order" name="sortBy" value="releaseDate" />
-      </label>
-      <label>
-        Reverse
-        <input type="checkbox" [(ngModel)]="reversed" name="reversed" value="1" />
-      </label>
+      <label> Release Date <input type="radio" [(ngModel)]="order" name="sortBy" value="releaseDate" /> </label>
     </div>
   </form>
 </div>
 
 <ul *ngIf="musicVideos?.results?.length" class="list-group">
   <li
-    *ngFor="let artist of musicVideos.results | orderBy: order:reversed"
+    *ngFor="let artist of musicVideos.results | orderBy: order"
     class="d-flex justify-content-between list-group-item"
   >
     <div class="list-container">
