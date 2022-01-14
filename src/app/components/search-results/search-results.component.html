@@ -1,3 +1,5 @@
+<h1 class="sr-only">Search Results</h1>
+
 <p *ngIf="!musicVideos && !showError" class="text-center">Getting results...</p>
 
 <p *ngIf="showError" class="text-center text-danger">An error occurred while loading the data.</p>
@@ -38,11 +40,9 @@
       <p class="artist-info my-0">Genre: {{ artist.primaryGenreName }}</p>
     </div>
     <div class="list-container">
-      <a [href]="artist.previewUrl" target="_blank">
-        <button class="btn btn-sm btn-outline-secondary">
-          <i class="fa fa-music mr-1" aria-hidden="true"></i> Preview
-        </button>
-      </a>
+      <button (click)="onPreviewVideo(modalTemplate, artist.trackId)" class="btn btn-sm btn-outline-secondary">
+        <i class="fa fa-music mr-1" aria-hidden="true"></i> Preview
+      </button>
       <p class="d-block text-right mt-2 mb-0 d-sm-none artist-info">
         {{ artist.releaseDate | date: 'M/d/yyyy' }}
       </p>
@@ -54,3 +54,15 @@
 </ul>
 
 <p *ngIf="musicVideos?.resultCount === 0" class="text-center">No results found</p>
+
+<ng-template #modalTemplate>
+  <div class="modal-header">
+    <h2 class="modal-title pull-left">{{ selectedMusicVideo?.trackName }}</h2>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <video [src]="selectedMusicVideo?.previewUrl" autoplay controls></video>
+  </div>
+</ng-template>
