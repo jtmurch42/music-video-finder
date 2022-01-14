@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { MusicVideo } from './music-video.model';
 
@@ -13,8 +14,19 @@ export class AppService {
   constructor(private http: HttpClient) {}
 
   getMusicVideos(): Observable<MusicVideo> {
-    return this.http.get<MusicVideo>(
-      `https://itunes.apple.com/search?entity=musicVideo&term=${this.artist}&attribute=allArtistTerm&country=US`
-    );
+    return this.http
+      .get<MusicVideo>(
+        `https://itunes.apple.com/search?entity=musicVideo&term=${this.artist}&attribute=allArtistTerm&country=US`
+      )
+      .pipe(
+        map((videos) => {
+          const filteredVidoes = videos.results.filter((vid) => vid.previewUrl);
+
+          return {
+            resultCount: videos.resultCount,
+            results: filteredVidoes
+          };
+        })
+      );
   }
 }
