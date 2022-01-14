@@ -2,8 +2,6 @@
 
 <p *ngIf="!musicVideos && !showError" class="text-center">Getting results...</p>
 
-<p *ngIf="showError" class="text-center text-danger">An error occurred while loading the data.</p>
-
 <div
   *ngIf="musicVideos?.resultCount"
   class="d-flex-none d-md-flex align-items-md-baseline justify-content-md-between mt-0"
@@ -12,8 +10,8 @@
     <span class="text-primary">{{ musicVideos.resultCount }}</span> results for {{ musicArtist }}
   </p>
 
-  <form #sortForm="ngForm" class="radio ml-1 mb-2">
-    <div class="form-group">
+  <form #sortForm="ngForm" class="radio ml-1">
+    <div class="form-group mb-1">
       <span class="mr-3 font-weight-bold">Sort:</span>
       <label class="mr-4">
         Track Name
@@ -23,6 +21,13 @@
     </div>
   </form>
 </div>
+
+<button *ngIf="musicVideos || showError" routerLink="/" class="btn btn-sm btn-dark mb-3">
+  <span class="back-arrow">&larr;</span>
+  Back
+</button>
+
+<p *ngIf="showError" class="text-center text-danger">An error occurred while loading the data.</p>
 
 <ul *ngIf="musicVideos?.results?.length" class="list-group">
   <li
