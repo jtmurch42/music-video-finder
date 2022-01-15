@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require("path").join(__dirname, "./coverage/ng-music-video-finder"),
+      dir: require("path").join(__dirname, "./coverage/music-video-finder"),
       subdir: ".",
       reporters: [{ type: "html" }, { type: "text-summary" }]
     },
