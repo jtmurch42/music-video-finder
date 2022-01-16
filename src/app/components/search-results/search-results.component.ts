@@ -13,7 +13,7 @@ import { MusicVideo, MusicVideoResult } from '../../music-video.model';
 })
 export class SearchResultsComponent implements OnInit {
   modalRef: BsModalRef;
-  musicArtist = this.appService.artist;
+  musicArtist: string;
   musicVideos: MusicVideo;
   selectedMusicVideo: MusicVideoResult;
   previewVideoUrl: string;
@@ -28,6 +28,8 @@ export class SearchResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.musicArtist = this.appService.artist;
+
     if (!this.musicArtist) {
       this.router.navigate(['/']);
       return;

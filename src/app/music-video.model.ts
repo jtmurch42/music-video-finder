@@ -1,34 +1,26 @@
 export interface MusicVideoResult {
+  wrapperType: string;
+  kind: string;
   artistId: number;
+  trackId: number;
   artistName: string;
+  trackName: string;
+  trackCensoredName: string;
   artistViewUrl: string;
+  trackViewUrl: string;
+  previewUrl: string;
   artworkUrl30: string;
   artworkUrl60: string;
   artworkUrl100: string;
-  collectionCensoredName: string;
-  collectionExplicitness: string;
-  collectionId: number;
-  collectionName: string;
   collectionPrice: number;
-  collectionViewUrl: string;
+  trackPrice: number;
+  releaseDate: string;
+  collectionExplicitness: string;
+  trackExplicitness: string;
+  trackTimeMillis: number;
   country: string;
   currency: string;
-  discCount: number;
-  discNumber: number;
-  kind: string;
-  previewUrl: string;
   primaryGenreName: string;
-  releaseDate: string;
-  trackCensoredName: string;
-  trackCount: number;
-  trackExplicitness: string;
-  trackId: number;
-  trackName: string;
-  trackNumber: number;
-  trackPrice: number;
-  trackTimeMillis: number;
-  trackViewUrl: string;
-  wrapperType: string;
 }
 
 export interface MusicVideo {
