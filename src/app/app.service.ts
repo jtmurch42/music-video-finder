@@ -15,8 +15,9 @@ export class AppService {
 
   getMusicVideos(): Observable<MusicVideo> {
     return this.http
-      .get<MusicVideo>(
-        `https://itunes.apple.com/search?entity=musicVideo&term=${this.artist}&attribute=allArtistTerm&country=US`
+      .jsonp<MusicVideo>(
+        `https://itunes.apple.com/search?entity=musicVideo&term=${this.artist}&attribute=allArtistTerm&country=US&limit=100`,
+        'callback'
       )
       .pipe(
         map((videos) => {
