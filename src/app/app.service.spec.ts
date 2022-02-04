@@ -20,10 +20,11 @@ describe('AppService', () => {
     httpMock.verify();
   });
 
-  it('should get music videos', () => {
+  it('should get music videos', (done: DoneFn) => {
     service.artist = 'Someartist';
     service.getMusicVideos().subscribe((res) => {
       expect(res).toEqual(mockMusicVideos);
+      done();
     });
 
     const req = httpMock.expectOne(
