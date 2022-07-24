@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { OrderModule, OrderPipe } from 'ngx-order-pipe';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -20,20 +19,17 @@ describe('SearchResultsComponent', () => {
   let fixture: ComponentFixture<SearchResultsComponent>;
   let mockAppService: any;
   let mockRouter: jasmine.SpyObj<Router>;
-  let mockOrderPipe: jasmine.SpyObj<OrderPipe>;
   let mockBsModalService: jasmine.SpyObj<BsModalService>;
 
   beforeEach(async () => {
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
-    mockOrderPipe = jasmine.createSpyObj('OrderPipe', ['transform']);
     mockBsModalService = jasmine.createSpyObj('BsModelService', ['show']);
 
     await TestBed.configureTestingModule({
-      imports: [FormsModule, OrderModule],
+      imports: [FormsModule],
       declarations: [SearchResultsComponent],
       providers: [
         { provide: AppService, useClass: MockAppService },
-        { provide: OrderPipe, useValue: mockOrderPipe },
         { provide: Router, useValue: mockRouter },
         { provide: BsModalService, useValue: mockBsModalService }
       ]
@@ -44,7 +40,6 @@ describe('SearchResultsComponent', () => {
 
   beforeEach(() => {
     mockAppService.getMusicVideos.and.returnValue(of(mockMusicVideos));
-    mockOrderPipe.transform.and.returnValue(mockMusicVideos);
 
     fixture = TestBed.createComponent(SearchResultsComponent);
     component = fixture.componentInstance;
@@ -53,7 +48,6 @@ describe('SearchResultsComponent', () => {
 
   describe('ngOnInit', () => {
     it('should get music videos', () => {
-      expect(mockOrderPipe.transform).toHaveBeenCalledOnceWith(mockMusicVideos, 'trackName');
       expect(component.musicVideos).toEqual(mockMusicVideos);
     });
 
