@@ -21,11 +21,11 @@ export class AppService {
       )
       .pipe(
         map((videos) => {
-          const filteredVidoes = videos.results.filter((vid) => vid.previewUrl);
+          const filteredVideos = videos.results.filter((vid) => vid.previewUrl);
 
           return {
-            resultCount: filteredVidoes.length,
-            results: filteredVidoes
+            resultCount: filteredVideos.length,
+            results: filteredVideos
           };
         })
       );
