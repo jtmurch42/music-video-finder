@@ -69,10 +69,6 @@ export class SearchResultsComponent implements OnInit {
   }
 
   private sortMusicVideos(order: SearchOrder, reversed = false): void {
-    if (!this.musicVideos?.results) {
-      return;
-    }
-
     this.musicVideos.results.sort((v1, v2) => {
       if (reversed) {
         return v1[order] > v2[order] ? -1 : 1;
