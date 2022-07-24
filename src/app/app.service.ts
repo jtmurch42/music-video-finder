@@ -24,7 +24,7 @@ export class AppService {
           const filteredVidoes = videos.results.filter((vid) => vid.previewUrl);
 
           return {
-            resultCount: videos.resultCount,
+            resultCount: filteredVidoes.length,
             results: filteredVidoes
           };
         })
