@@ -10,14 +10,14 @@
     <span class="text-primary">{{ musicVideos.resultCount }}</span> results for {{ musicArtist }}
   </p>
 
-  <form #sortForm="ngForm" class="radio ml-1">
+  <form class="radio ml-1" (change)="onChangeSearchOrder()">
     <div class="form-group mb-1">
       <span class="mr-3 font-weight-bold">Sort:</span>
       <label class="mr-4">
         Track Name
-        <input type="radio" [(ngModel)]="order" name="sortBy" value="trackName" />
+        <input type="radio" [(ngModel)]="searchOrder" name="sortBy" value="trackName" />
       </label>
-      <label> Release Date <input type="radio" [(ngModel)]="order" name="sortBy" value="releaseDate" /> </label>
+      <label> Release Date <input type="radio" [(ngModel)]="searchOrder" name="sortBy" value="releaseDate" /> </label>
     </div>
   </form>
 </div>
@@ -30,10 +30,7 @@
 <p *ngIf="showError" class="text-center text-danger">An error occurred while loading the data.</p>
 
 <ul *ngIf="musicVideos?.results?.length" class="list-group">
-  <li
-    *ngFor="let artist of musicVideos.results | orderBy: order"
-    class="d-flex justify-content-between list-group-item"
-  >
+  <li *ngFor="let artist of musicVideos.results" class="d-flex justify-content-between list-group-item">
     <div class="list-container">
       <p class="mt-0 mb-2 artist-heading">
         {{ artist.trackName }}

@@ -1,10 +1,14 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderPipe } from 'ngx-order-pipe';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { AppService } from '../../app.service';
 import { MusicVideo, MusicVideoResult } from '../../music-video.model';
+
+enum SearchOrder {
+  TrackName = 'trackName',
+  ReleaseDate = 'releaseDate'
+}
 
 @Component({
   selector: 'app-search-results',
@@ -16,16 +20,10 @@ export class SearchResultsComponent implements OnInit {
   musicArtist: string;
   musicVideos: MusicVideo;
   selectedMusicVideo: MusicVideoResult;
-  previewVideoUrl: string;
-  order = 'trackName';
+  searchOrder = SearchOrder.TrackName;
   showError: boolean;
 
-  constructor(
-    private appService: AppService,
-    private orderPipe: OrderPipe,
-    private router: Router,
-    private modalService: BsModalService
-  ) {}
+  constructor(private appService: AppService, private router: Router, private modalService: BsModalService) {}
 
   ngOnInit(): void {
     this.musicArtist = this.appService.artist;
@@ -38,12 +36,27 @@ export class SearchResultsComponent implements OnInit {
     this.appService.getMusicVideos().subscribe(
       (res) => {
         this.musicVideos = res;
-        this.musicVideos = this.orderPipe.transform(this.musicVideos, 'trackName');
+        this.sortMusicVideos(this.searchOrder);
       },
       () => {
         this.showError = true;
       }
     );
+  }
+
+  onChangeSearchOrder(): void {
+    switch (this.searchOrder) {
+      case SearchOrder.TrackName:
+        this.sortMusicVideos(SearchOrder.TrackName);
+        break;
+
+      case SearchOrder.ReleaseDate:
+        this.sortMusicVideos(SearchOrder.ReleaseDate, true);
+        break;
+
+      default:
+        break;
+    }
   }
 
   onPreviewVideo(template: TemplateRef<any>, trackId: number): void {
@@ -53,5 +66,18 @@ export class SearchResultsComponent implements OnInit {
       this.selectedMusicVideo = video;
       this.modalRef = this.modalService.show(template);
     }
+  }
+
+  private sortMusicVideos(order: SearchOrder, reversed = false): void {
+    if (!this.musicVideos?.results) {
+      return;
+    }
+
+    this.musicVideos.results.sort((v1, v2) => {
+      if (reversed) {
+        return v1[order] > v2[order] ? -1 : 1;
+      }
+      return v1[order] > v2[order] ? 1 : -1;
+    });
   }
 }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
-import { OrderModule } from 'ngx-order-pipe';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +18,6 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     FormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    OrderModule,
     ModalModule.forRoot()
   ],
   bootstrap: [AppComponent]
